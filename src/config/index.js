@@ -1,0 +1,1 @@
+export const {MONGO_URL,TOKEN_SECRET,DOMAIN} = process.env;
