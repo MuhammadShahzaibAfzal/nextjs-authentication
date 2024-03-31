@@ -22,7 +22,7 @@ export const POST = async (request) => {
     if (isExist) {
       return NextResponse.json(
         { message: "Email is already exist." },
-        { status: 403 }
+        { status: 409 }
       );
     }
     // hashed password
@@ -35,6 +35,7 @@ export const POST = async (request) => {
       password: hashedPassword,
     });
     //TODO: SEND VERIFICATION MAIL TO USER
+    await sendMail({ emailType: "VERIFY", userID: user._id });
     return NextResponse.json(
       { user, message: "User created successfully !" },
       { status: 201 }
