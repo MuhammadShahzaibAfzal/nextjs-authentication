@@ -37,7 +37,14 @@ export const POST = async (request) => {
     //TODO: SEND VERIFICATION MAIL TO USER
     await sendMail({ emailType: "VERIFY", userID: user._id });
     return NextResponse.json(
-      { user, message: "User created successfully !" },
+      {
+        user: {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+        },
+        message: "User created successfully !",
+      },
       { status: 201 }
     );
   } catch (error) {
